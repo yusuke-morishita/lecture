@@ -10,7 +10,7 @@ import torch.utils.data
 detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 # Read a file list
-with open('lfw_with_smile_label_test.txt') as f:
+with open('lfw_with_smile_label.txt') as f:
     file_list = [s.strip().split() for s in f.readlines()]
 
     # Initialize a training data
