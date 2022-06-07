@@ -8,7 +8,7 @@ from torchvision import datasets, transforms
 # training parameters
 num_epochs = 10
 num_batch = 64
-learning_rate = 0.0001
+learning_rate = 0.01
 
 # GPU or CPU
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
