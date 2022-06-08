@@ -136,3 +136,46 @@ img_n = cv2.resize(img_g[y:y+h, x:x+w], dsize=(32,32))
 cv2.imshow('image', img_n)
 cv2.waitKey(-1)
 ```
+
+### 学習データの準備：正解データ
+
+LFWの顔画像（一部）に対して、予め笑顔か無表情かのラベルを付与した正解データを使用する。
+
+- 正解データのダウンロード
+  - 以下のファイルをダウンロードし、保存する
+    - https://github.com/yusuke-morishita/lecture/blob/main/1/lfw_with_smile_label.txt
+    - 上記はGithubのページ。ファイルを（wget等で）直接ダウンロードする場合は、以下
+      - https://raw.githubusercontent.com/yusuke-morishita/lecture/main/1/lfw_with_smile_label.txt
+
+- 正解データのファイルの内容
+  - 画像ファイル名、笑顔ラベル（笑顔=1、無表情=0）の順で、1行ずつ格納
+  - 無表情が 1,913 枚、笑顔が 1,867 枚、合計 3,780 枚
+```
+.\lfw\AJ_Lamas\AJ_Lamas_0001.jpg 1
+.\lfw\Aaron_Eckhart\Aaron_Eckhart_0001.jpg 0
+.\lfw\Aaron_Peirsol\Aaron_Peirsol_0001.jpg 1
+.\lfw\Aaron_Peirsol\Aaron_Peirsol_0003.jpg 1
+.\lfw\Aaron_Sorkin\Aaron_Sorkin_0001.jpg 1
+.\lfw\Aaron_Sorkin\Aaron_Sorkin_0002.jpg 1
+.\lfw\Abbas_Kiarostami\Abbas_Kiarostami_0001.jpg 0
+.\lfw\Abdel_Nasser_Assidi\Abdel_Nasser_Assidi_0001.jpg 0
+.\lfw\Abdoulaye_Wade\Abdoulaye_Wade_0002.jpg 1
+.\lfw\Abdoulaye_Wade\Abdoulaye_Wade_0003.jpg 0
+...
+```
+
+### 学習データの生成
+
+上記の正解データを読み込み、各顔画像に対して顔検出を行い、顔領域を切り出し、笑顔ラベルとセットでファイルに保存する。
+
+- 学習データ生成のプログラムのダウンロード
+  - 以下のファイルをダウンロードし、保存する。
+    - https://github.com/yusuke-morishita/lecture/blob/main/1/create_training_data.py
+
+- 学習データ生成の実行
+  - 仮想環境で、以下を実行する。
+  - 学習データの`smile_dataset.pt`が生成され、保存される。
+```bat
+python create_training_data.py
+```
+
