@@ -327,3 +327,19 @@ class Net(nn.Module):
 ```bat
 python train_smile_model_lenet1.py
 ```
+
+## 動作確認
+
+### カメラを用いた動作確認: LeNet
+
+LeNetで学習した笑顔判定の画像認識モデルを、カメラから入力した画像で動作確認する。
+
+- 動作確認用のプログラムのダウンロード
+  - 以下のファイルをダウンロードし、保存する。
+    - https://github.com/yusuke-morishita/lecture/blob/main/1/test_smile_model_lenet1.py
+
+- 動作確認の実行
+  - 仮想環境で、以下を実行する。
+```bat
+python test_smile_model_lenet1.py
+```
