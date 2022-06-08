@@ -179,3 +179,151 @@ LFWの顔画像（一部）に対して、予め笑顔か無表情かのラベ�
 python create_training_data.py
 ```
 
+
+## 学習の実行
+
+### 学習１: MLP
+
+多層パーセプトロン（Multi-layer perceptron: MLP）で、笑顔判定の画像認識モデルを学習する。
+
+- 学習データ生成のプログラムのダウンロード
+  - 以下のファイルをダウンロードし、保存する。
+    - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_mlp1.py
+
+- 画像認識モデル
+  - 4層の多層パーセプトロン（Multi-layer perceptron）を用いる。
+  - 認識モデルの定義は、`train_smile_model_mlp1.py`の以下の部分
+```python
+# Define a nuural network model (MLP)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.classifier = nn.Sequential(
+            nn.Linear(32 * 32, 100),
+            nn.Linear(100, 50),
+            nn.Linear(50, 2)
+        )
+
+    def forward(self, x):
+        return self.classifier(x)
+```
+   - 学習パラメータは、`train_smile_model_mlp1.py`の以下の部分
+```python
+# training parameters
+num_epochs = 10
+num_batch = 64
+learning_rate = 0.001
+```
+
+- 学習の実行
+  - 仮想環境で、以下を実行する。
+  - 学習結果の`model_weights.pth`が生成され、保存される。
+```bat
+python train_smile_model_mlp1.py
+```
+
+### 学習２: MLPで学習パラメータを変更
+
+MLPを用いた学習において、学習パラメータを変更して、笑顔判定の画像認識モデルを学習する。
+
+- 学習データ生成のプログラムのダウンロード
+  - 以下のファイルをダウンロードし、保存する。
+    - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_mlp1m.py
+
+- 画像認識モデル
+  - 4層の多層パーセプトロン（Multi-layer perceptron）を用いる。
+  - 認識モデルの定義は、`train_smile_model_mlp1.py`と同様。
+  - 学習パラメータは、`train_smile_model_mlp1m.py`の以下の部分。学習率`learning_rate`を10倍に変更。
+```python
+# training parameters
+num_epochs = 10
+num_batch = 64
+learning_rate = 0.01
+```
+
+- 学習の実行
+  - 仮想環境で、以下を実行する。
+  - 学習結果の`model_weights.pth`が生成され、保存される。
+```bat
+python train_smile_model_mlp1m.py
+```
+
+### 学習３: MLPでモデル定義を変更
+
+MLPを用いた学習において、モデル定義を変更して、笑顔判定の画像認識モデルを学習する。
+
+- 学習データ生成のプログラムのダウンロード
+  - 以下のファイルをダウンロードし、保存する。
+    - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_mlp2.py
+
+- 画像認識モデル
+  - 4層の多層パーセプトロン（Multi-layer perceptron）を用いる。
+  - 学習パラメータは、`train_smile_model_mlp1.py`と同様。
+  - 認識モデルの定義は、`train_smile_model_mlp2.py`の以下の部分。中間層に非線形関数のReLUを追加。
+```python
+# Define a nuural network model (MLP)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.classifier = nn.Sequential(
+            nn.Linear(32 * 32, 256),
+            nn.ReLU(inplace = True),
+            nn.Linear(256, 128),
+            nn.ReLU(inplace = True),
+            nn.Linear(128, 2)
+        )
+
+    def forward(self, x):
+        return self.classifier(x)
+```
+
+- 学習の実行
+  - 仮想環境で、以下を実行する。
+  - 学習結果の`model_weights.pth`が生成され、保存される。
+```bat
+python train_smile_model_mlp.py
+```
+
+### 学習４: モデル定義をLeNetに変更
+
+認識モデルを画像認識用に提案されたLeNetに変更して、笑顔判定の画像認識モデルを学習する。
+
+- 学習データ生成のプログラムのダウンロード
+  - 以下のファイルをダウンロードし、保存する。
+    - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_lenet1.py
+
+- 画像認識モデル
+  - 1998年に画像認識用に提案されたLeNetを用いる。
+    - Yann LeCun et al. Gradient Based Learning Applied to Document Recognition, 1998
+  - 学習パラメータは、`train_smile_model_mlp1.py`と同様。
+  - 認識モデルの定義は、`train_smile_model_lenet1.py`の以下の部分。畳み込みニューラルネットワークのConv2dなどを使用。
+```python
+# Define a nuural network model (LeNet)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.classifier = nn.Sequential(
+            nn.Conv2d(1, 6, kernel_size = 5),
+            nn.ReLU(inplace = True),
+            nn.MaxPool2d(2),
+            nn.Conv2d(6, 16, kernel_size = 5),
+            nn.ReLU(inplace = True),
+            nn.MaxPool2d(2),
+            nn.Flatten(),
+            nn.Linear(16 * 5 * 5, 120),
+            nn.ReLU(inplace = True),
+            nn.Linear(120, 84),
+            nn.ReLU(inplace = True),
+            nn.Linear(84, 2)
+        )
+
+    def forward(self, x):
+        return self.classifier(x)
+```
+
+- 学習の実行
+  - 仮想環境で、以下を実行する。
+  - 学習結果の`model_weights.pth`が生成され、保存される。
+```bat
+python train_smile_model_lenet1.py
+```
