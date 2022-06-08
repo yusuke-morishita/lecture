@@ -186,7 +186,7 @@ python create_training_data.py
 
 多層パーセプトロン（Multi-layer perceptron: MLP）で、笑顔判定の画像認識モデルを学習する。
 
-- 学習データ生成のプログラムのダウンロード
+- 学習用のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
     - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_mlp1.py
 
@@ -226,7 +226,7 @@ python train_smile_model_mlp1.py
 
 MLPを用いた学習において、学習パラメータを変更して、笑顔判定の画像認識モデルを学習する。
 
-- 学習データ生成のプログラムのダウンロード
+- 学習用のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
     - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_mlp1m.py
 
@@ -252,7 +252,7 @@ python train_smile_model_mlp1m.py
 
 MLPを用いた学習において、モデル定義を変更して、笑顔判定の画像認識モデルを学習する。
 
-- 学習データ生成のプログラムのダウンロード
+- 学習用のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
     - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_mlp2.py
 
@@ -288,7 +288,7 @@ python train_smile_model_mlp.py
 
 認識モデルを画像認識用に提案されたLeNetに変更して、笑顔判定の画像認識モデルを学習する。
 
-- 学習データ生成のプログラムのダウンロード
+- 学習用のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
     - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_lenet1.py
 
