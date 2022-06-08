@@ -96,7 +96,7 @@ OpenCVに実装されている顔検出を使い、LFWの顔画像から顔の�
       - https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
 
 - PythonでのOpenCVを使った顔検出
-  - OpenCV を使い、読み込んだ顔画像から顔検出を行い、結果を表示する。
+  - OpenCV を使い、読み込んだ顔画像から顔検出を行い、結果を表示する。さらに、顔領域を切り出した画像を生成する。
   - 仮想環境の Python インタプリタで、以下を実行する。
 ```python
 # OpenCVを使うことの宣言
@@ -118,10 +118,21 @@ print(faces)
 # 顔検出結果の取り出し
 x, y, w, h = faces[0]
 # 検出した顔の矩形を入力画像に描画
-#  矩形の左上座標(x,y)、右下座標(x+w, y+h)、赤色(0,0,255)、線幅2を指定して描画
+#  - OpenCVの矩形を描画する関数cv2.rectangle()を使う
+#  - 矩形の左上座標(x,y)、右下座標(x+w, y+h)、赤色(0,0,255)、線幅2を指定して描画
 cv2.rectangle(img, (x,y), (x+w, y+h), (0,0,255), 2)
 
 # 顔検出結果を描画した画像の表示
 cv2.imshow('image', img)
+cv2.waitKey(-1)
+
+# 検出した顔の位置で顔領域の画像を切り出し
+#  - OpenCVの画像を拡大・縮小する関数cv2.resize()を使う
+#  - グレースケール画像（numpyの2次元配列）から、0次元目＝画像の縦方向を[y:y+h]の範囲、1次元目＝画像の横方向を[x:x+w]の範囲で切り出す：img_g[y:y+h, x:x+w]
+#  - 切り出した範囲を、cv2.resize()関数を使い(32,32)画素の大きさに縮小し、学習データの画像サイズを揃える
+img_n = cv2.resize(img_g[y:y+h, x:x+w], dsize=(32,32))
+
+# 顔領域を切り出した画像の表示
+cv2.imshow('image', img_n)
 cv2.waitKey(-1)
 ```
