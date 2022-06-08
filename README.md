@@ -75,8 +75,53 @@ file.close
   - OpenCV を使い、画像ファイルの読み込み、画像の表示を行う。
   - 仮想環境の Python インタプリタで、以下を実行する。
 ```python
+# OpenCVを使うことの宣言
 import cv2
+# 画像ファイルの読み込み
 img = cv2.imread('lfw\Aaron_Guiel\Aaron_Guiel_0001.jpg')
+# 読み込んだ画像の表示
+cv2.imshow('image', img)
+cv2.waitKey(-1)
+```
+
+### 学習データの準備：入力画像
+
+OpenCVに実装されている顔検出を使い、LFWの顔画像から顔の領域を切り出す。
+
+- OpenCVを使った顔検出について
+  - OpenCV に実装されている「Haar Cascade 顔検出」を利用する。2001年提案の非常に高速で代表的な手法。
+  - 顔検出用の学習モデルを、以下のURLからダウンロードし、保存する
+    - https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml
+    - 上記はGithubのページ。ファイルを（wget等で）直接ダウンロードする場合は、以下
+      - https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+
+- PythonでのOpenCVを使った顔検出
+  - OpenCV を使い、読み込んだ顔画像から顔検出を行い、結果を表示する。
+  - 仮想環境の Python インタプリタで、以下を実行する。
+```python
+# OpenCVを使うことの宣言
+import cv2
+# 画像ファイルの読み込み
+img = cv2.imread('lfw\Aaron_Guiel\Aaron_Guiel_0001.jpg')
+# 画像をグレースケールに変換
+img_g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# 顔検出を初期化（学習モデルをファイルから読み込み）
+detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+# 顔検出を実行
+faces = detector.detectMultiScale(img_g)
+# 顔検出の結果を表示
+print(faces)
+# [[66 67 119 119]]などのように顔検出の結果が表示される
+# 顔検出結果には、顔の矩形の [左上x座標、左上y座標、矩形幅、矩形高さ] が入る
+
+# 顔検出結果の取り出し
+x, y, w, h = faces[0]
+# 検出した顔の矩形を入力画像に描画
+#  矩形の左上座標(x,y)、右下座標(x+w, y+h)、赤色(0,0,255)、線幅2を指定して描画
+cv2.rectangle(img, (x,y), (x+w, y+h), (0,0,255), 2)
+
+# 顔検出結果を描画した画像の表示
 cv2.imshow('image', img)
 cv2.waitKey(-1)
 ```
