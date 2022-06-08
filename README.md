@@ -4,6 +4,11 @@
 
 Windows上のPython（公式版／Anaconda）で仮想環境を準備し、必要なパッケージをインストールする。
 
+- Pythonのインストール
+  - Python 公式サイトからダウンロードし、インストール。
+    - https://www.python.org/downloads/windows/
+    - 2022年6月1日時点の最新版は3.10.4
+
 - フォルダの作成
 ```bat
 mkdir lecture1
