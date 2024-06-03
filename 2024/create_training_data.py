@@ -5,6 +5,8 @@ import numpy as np
 # Using PyTorch
 import torch
 import torch.utils.data
+# Using progress bar
+from tqdm import tqdm
 
 # Initialize a face detector by OpenCV
 detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -17,9 +19,9 @@ with open('lfw_with_smile_label.txt') as f:
     data_x = []
     data_y = []
 
-    for filename, smile_label in file_list:
+    for filename, smile_label in tqdm(file_list):
         # Read one image from file list
-        print(filename, smile_label)
+        #print(filename, smile_label)
         img_bgr = cv2.imread(filename)
         img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
 
@@ -29,16 +31,14 @@ with open('lfw_with_smile_label.txt') as f:
         # Show detection results
         #for x, y, w, h in faces:
         #    cv2.rectangle(img_bgr, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        #cv2.imshow('', img_bgr)
-        #cv2.waitKey(0)
+        #cv2_imshow(img_bgr)
 
         # Create one norm image
         for x, y, w, h in faces:
             img_norm = cv2.resize(img_gray[y:y + h, x:x + w], dsize = (32, 32))
             data_x.append(img_norm)
             data_y.append(int(smile_label))
-            #cv2.imshow('', img_norm)
-            #cv2.waitKey(0)
+            #cv2_imshow(img_norm)
             break
 
     # Create a training data
@@ -49,4 +49,3 @@ with open('lfw_with_smile_label.txt') as f:
     dataset = torch.utils.data.TensorDataset(data_x, data_y)
     # Save the training data
     torch.save(dataset, 'smile_dataset.pt')
-
