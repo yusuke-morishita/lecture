@@ -143,9 +143,9 @@ LFWの顔画像（一部）に対して、予め笑顔か無表情かのラベ�
 
 - 正解データのダウンロード
   - 以下のファイルをダウンロードし、保存する
-    - https://github.com/yusuke-morishita/lecture/blob/main/1/lfw_with_smile_label.txt
+    - https://github.com/yusuke-morishita/lecture/blob/main/2025/lfw_with_smile_label.txt
     - 上記はGithubのページ。ファイルを（wget等で）直接ダウンロードする場合は、以下
-      - https://raw.githubusercontent.com/yusuke-morishita/lecture/main/1/lfw_with_smile_label.txt
+      - https://raw.githubusercontent.com/yusuke-morishita/lecture/main/2025/lfw_with_smile_label.txt
 
 - 正解データのファイルの内容
   - 画像ファイル名、笑顔ラベル（笑顔=1、無表情=0）の順で、1行ずつ格納
@@ -170,7 +170,7 @@ LFWの顔画像（一部）に対して、予め笑顔か無表情かのラベ�
 
 - 学習データ生成のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
-    - https://github.com/yusuke-morishita/lecture/blob/main/1/create_training_data.py
+    - https://github.com/yusuke-morishita/lecture/blob/main/2025/create_training_data.py
 
 - 学習データ生成の実行
   - 仮想環境で、以下を実行する。
@@ -188,7 +188,7 @@ python create_training_data.py
 
 - 学習用のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
-    - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_mlp1.py
+    - https://github.com/yusuke-morishita/lecture/blob/main/2025/train_smile_model_mlp1.py
 
 - 画像認識モデル
   - 4層の多層パーセプトロン（Multi-layer perceptron）を用いる。
@@ -228,7 +228,7 @@ MLPを用いた学習において、学習パラメータを変更して、笑�
 
 - 学習用のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
-    - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_mlp1m.py
+    - https://github.com/yusuke-morishita/lecture/blob/main/2025/train_smile_model_mlp1m.py
 
 - 画像認識モデル
   - 4層の多層パーセプトロン（Multi-layer perceptron）を用いる。
@@ -254,7 +254,7 @@ MLPを用いた学習において、モデル定義を変更して、笑顔判�
 
 - 学習用のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
-    - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_mlp2.py
+    - https://github.com/yusuke-morishita/lecture/blob/main/2025/train_smile_model_mlp2.py
 
 - 画像認識モデル
   - 4層の多層パーセプトロン（Multi-layer perceptron）を用いる。
@@ -290,7 +290,7 @@ python train_smile_model_mlp.py
 
 - 学習用のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
-    - https://github.com/yusuke-morishita/lecture/blob/main/1/train_smile_model_lenet1.py
+    - https://github.com/yusuke-morishita/lecture/blob/main/2025/train_smile_model_lenet1.py
 
 - 画像認識モデル
   - 1998年に画像認識用に提案されたLeNetを用いる。
@@ -336,7 +336,7 @@ LeNetで学習した笑顔判定の画像認識モデルを、カメラから入
 
 - 動作確認用のプログラムのダウンロード
   - 以下のファイルをダウンロードし、保存する。
-    - https://github.com/yusuke-morishita/lecture/blob/main/1/test_smile_model_lenet1.py
+    - https://github.com/yusuke-morishita/lecture/blob/main/2025/test_smile_model_lenet1.py
 
 - 動作確認の実行
   - 仮想環境で、以下を実行する。
