@@ -3,6 +3,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import datasets, transforms
+from torch.utils.data import TensorDataset
+torch.serialization.add_safe_globals([TensorDataset])
 
 # ===== Training params =====
 # training parameters
